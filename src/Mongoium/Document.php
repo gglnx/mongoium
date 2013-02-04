@@ -37,7 +37,7 @@ namespace Mongoium;
  * Exceptions
  */
 class MongoiumDocumentException extends \Exception { }
-class SavingException extends MongoiumQueryException {}
+class SavingException extends MongoiumDocumentException {}
 
 /**
  * 
