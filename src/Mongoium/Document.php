@@ -120,8 +120,8 @@ class Document implements \ArrayAccess {
 			$this->__saved = false;
 
 			// Return array
-    		return $this->__data[$parameter];
-    	endif;
+			return $this->__data[$parameter];
+		endif;
 
 		// MongoId is requested, but didn't exists
 		if ( 'id' == $parameter && false == array_key_exists( '_id', $this->__data ) )

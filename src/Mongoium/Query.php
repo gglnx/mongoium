@@ -88,7 +88,7 @@ class Query implements \IteratorAggregate {
 	 */
 	public function getIterator() {
 		return new \ArrayIterator($this->select());
-    }
+	}
 
 	/**
 	 * 
@@ -115,13 +115,13 @@ class Query implements \IteratorAggregate {
 		return array_map(function($document) {
 			return new Document($this->collectionName, $document, true, true);
 		}, iterator_to_array($query));
-    }
+	}
 
-    /**
-     *
-     */
-    public function findOne() {
-    	// Optimize query
+	/**
+	 *
+	 */
+	public function findOne() {
+		// Optimize query
 		$query = $this->optimizeQuery();
 
 		// Open the query
@@ -133,7 +133,7 @@ class Query implements \IteratorAggregate {
 
 		// Return Document object
 		return new Document($this->collectionName, $document, true, true);
-    }
+	}
 	
 	/**
 	 * count()
@@ -174,11 +174,11 @@ class Query implements \IteratorAggregate {
 	 * Uses the same Query API as the main query. The main query object is returned.
 	 *
 	 * $query->sq('or', function($q) {
-	 *     // One of these fields must match to find documents
-	 *     $q->is('field1', 'value1');
-	 *     $q->is('field2', 'value2');
+	 *	 // One of these fields must match to find documents
+	 *	 $q->is('field1', 'value1');
+	 *	 $q->is('field2', 'value2');
 	 *
-	 *     return $q;
+	 *	 return $q;
 	 * });
 	 */
 	public function sq($type, $subquery) {
