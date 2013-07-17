@@ -136,6 +136,21 @@ class Query implements \IteratorAggregate {
 	}
 	
 	/**
+	 * findById(mixed $id)
+	 *
+	 * Finds a document by ID. ID can be string or a MongoID object. Stortcut for 
+	 * ->is('id', $id)->findOne();
+	 *
+	 */
+	public function findById($id) {
+		// Set ID
+		$this->is('id', $id);
+		
+		// Find document
+		return $this->findOne();
+	}
+	
+	/**
 	 * count()
 	 */
 	public function count() {
