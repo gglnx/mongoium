@@ -71,7 +71,7 @@ class Document implements \ArrayAccess {
 	/**
 	 *
 	 */
-	private static $timezone;
+	protected static $timezone;
 	
 	/**
 	 *
@@ -81,7 +81,7 @@ class Document implements \ArrayAccess {
 		$this->__collection = $collection;
 
 		// Timezone
-		$this->__timezone = $timezone ?: self::getTimezone();
+		$this->__timezone = $timezone ?: static::getTimezone();
 		
 		// Set the data
 		if ( true == $raw )
