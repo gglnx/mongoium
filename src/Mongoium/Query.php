@@ -64,14 +64,20 @@ class Query implements \IteratorAggregate {
 	 *
 	 */
 	protected $collectionName;
+
+	/**
+	 * 
+	 */
+	protected $documentClass;
 	
 	/**
 	 *
 	 */
-	public function __construct($collection) {
+	public function __construct($collection, $documentClass = '\Mongoium\Document') {
 		// Set collection name
 		$this->collectionName = $collection;
 		$this->collection = Connection::getCollection($this->collectionName);
+		$this->documentClass = $documentClass;
 		
 		return $this;
 	}
@@ -79,8 +85,8 @@ class Query implements \IteratorAggregate {
 	/**
 	 *
 	 */
-	public static function init($collection) {
-		return new self($collection);
+	public static function init($collection, $documentClass = '\Mongoium\Document') {
+		return new self($collection, $documentClass);
 	}
 	
 	/**
@@ -113,7 +119,8 @@ class Query implements \IteratorAggregate {
 	
 		// Return Document objects
 		return array_map(function($document) {
-			return new Document($this->collectionName, $document, true, true);
+			$documentClass = $this->documentClass;
+			return new $documentClass($this->collectionName, $document, true, true);
 		}, iterator_to_array($query));
 	}
 
@@ -132,7 +139,8 @@ class Query implements \IteratorAggregate {
 			throw new NothingFoundException("No document was found matching to your query, collection is {$this->collectionName}.");
 
 		// Return Document object
-		return new Document($this->collectionName, $document, true, true);
+		$documentClass = $this->documentClass;
+		return new $documentClass($this->collectionName, $document, true, true);
 	}
 	
 	/**

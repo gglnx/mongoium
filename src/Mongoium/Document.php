@@ -76,7 +76,11 @@ class Document implements \ArrayAccess {
 	/**
 	 *
 	 */
-	public function __construct($collection, $data = array(), $raw = false, $saved = false, $timezone = null) {
+	public function __construct($collection = null, $data = array(), $raw = false, $saved = false, $timezone = null) {
+		// Generate collection name
+		if ( null == $collection )
+			$collection = static::$collectionName;
+
 		// Name of the collection
 		$this->__collection = $collection;
 
@@ -310,6 +314,17 @@ class Document implements \ArrayAccess {
 		endif;
 		
 		return $state;
+	}
+
+	/**
+	 * 
+	 */
+	public static function query() {
+		// Get collection name
+		$collectionName = static::$collectionName;
+
+		// Init query
+		return Query::init($collectionName, get_called_class());
 	}
 	
 	/**
